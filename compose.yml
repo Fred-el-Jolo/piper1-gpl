@@ -1,0 +1,9 @@
+services:
+    piper:
+      build: .
+      container_name: piper
+      volumes:
+        - ./data:/data
+      ports:
+        - 5000:5000
+      restart: unless-stopped

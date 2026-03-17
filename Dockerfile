@@ -24,8 +24,12 @@ COPY --from=builder /app/dist/piper_tts-*linux*.whl ./dist/
 RUN pip3 install ./dist/piper_tts-*linux*.whl
 RUN pip3 install 'flask>=3,<4'
 
+RUN mkdir /data
+
 COPY docker/entrypoint.sh /
 
 EXPOSE 5000
 
 ENTRYPOINT ["/entrypoint.sh"]
+CMD ["server", "-m", "en_GB-northern_english_male-medium"]
+#ENTRYPOINT ["/bin/sh", "-c", "ls -la /data"]

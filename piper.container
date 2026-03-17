@@ -1,0 +1,35 @@
+[Unit]
+Description=Piper container
+
+[Container]
+ContainerName=piper
+Image=localhost/piper1-gpl_piper
+
+# Enable auto-update container
+AutoUpdate=local
+
+Volume=/home/jolo/dev/piper1-gpl/data:/data
+
+#HostName=syncthing
+PublishPort=5000:5000/tcp
+
+#Environment=PUID=1000
+#Environment=PGID=1000
+#Environment=TZ=Etc/UTC
+
+# UID mapping is needed to run linuxserver.io container as rootless podman.
+# This will map UID=1000 inside the container to intermediate UID=0.
+# For rootless podman intermediate UID=0 will be mapped to the UID of current user.
+#UIDMap=1000:0:1
+#UIDMap=0:1:1000
+#UIDMap=1001:1001:64536
+
+[Service]
+Restart=always
+
+# Extend Timeout to allow time to pull the image
+TimeoutStartSec=60
+
+# The [Install] section allows enabling the generated service.
+[Install]
+WantedBy=default.target
